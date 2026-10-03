@@ -26,6 +26,8 @@ export interface CheckResult {
   finalUrl?: string;
   httpStatus?: number;
   title?: string;
+  durationSeconds?: number;
+  durationSource?: 'youtube-data-api';
 }
 
 export interface VideoObservation {

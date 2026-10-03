@@ -72,6 +72,30 @@ test('a provider-reported video outside the event duration blocks even after man
   assert.equal(evaluateRequirement({ ...video, confirmed: true }, filled, { video: page }, true, 150).status, 'verified');
 });
 
+test('video confirmation covers duration and cannot clear measured length warnings', () => {
+  const video = lovhackRequirements.find((item) => item.id === 'demo-video')!;
+  const url = 'https://www.youtube.com/watch?v=y-FgiJwzyMM';
+  const filled = { ...draft, videoUrl: url };
+  const unknown: CheckResult = {
+    kind: 'video', inputUrl: url, status: 'review', label: 'Video duration unverified',
+    detail: 'Duration was not returned.', observation: 'YouTube title only', checkedAt: new Date().toISOString(),
+  };
+  assert.equal(evaluateRequirement(video, filled, { video: unknown }, false).status, 'review');
+  const manuallyConfirmed = evaluateRequirement({ ...video, confirmed: true }, filled, { video: unknown }, false);
+  assert.equal(manuallyConfirmed.status, 'verified');
+  assert.match(manuallyConfirmed.reason, /2–3 minute length/);
+  assert.match(manuallyConfirmed.reason, /did not independently measure/);
+
+  const tooShort: CheckResult = { ...unknown, durationSeconds: 112, durationSource: 'youtube-data-api', status: 'blocked', detail: 'YouTube reports 01:52.' };
+  assert.equal(evaluateRequirement({ ...video, confirmed: true }, filled, { video: tooShort }, false).status, 'blocked');
+  const borderline: CheckResult = { ...unknown, durationSeconds: 119, durationSource: 'youtube-data-api', detail: 'YouTube reports 01:59.' };
+  const nearResult = evaluateRequirement({ ...video, confirmed: true }, filled, { video: borderline }, false);
+  assert.equal(nearResult.status, 'blocked');
+  assert.match(nearResult.reason, /checkbox cannot clear/);
+  const inRange: CheckResult = { ...unknown, durationSeconds: 145, durationSource: 'youtube-data-api', detail: 'YouTube reports 02:25.' };
+  assert.equal(evaluateRequirement({ ...video, confirmed: true }, filled, { video: inRange }, false).status, 'verified');
+});
+
 test('export preserves rule source and observed status rather than a readiness score', () => {
   const markdown = exportMarkdown(draft, lovhackRequirements, {}, false);
   assert.match(markdown, /NEEDS HUMAN REVIEW.*Public repository/);

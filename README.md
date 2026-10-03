@@ -2,6 +2,8 @@
 
 **Paste your hackathon rules and draft links. See what a judge can actually reach before you submit.**
 
+**Live app:** https://submitline.vercel.app
+
 Submitline is a LovHack Season 3 entry built by **Rishik Rontala**. It pairs the official submission contract with unauthenticated link checks, GitHub public-visibility evidence, YouTube metadata, and deAPI Video Description observations. Each requirement stays **verified**, **blocked**, or **needs human review**; there is no readiness score.
 
 ## Run locally
@@ -9,7 +11,7 @@ Submitline is a LovHack Season 3 entry built by **Rishik Rontala**. It pairs the
 Requires Node.js 22 or newer.
 
 1. Run npm install.
-2. Copy .env.example to .env.local and set DEAPI_API_KEY to enable video analysis. Keep the key server-side; never use a NEXT_PUBLIC_ name.
+2. Copy `example.env` to `.env.local`. Set `DEAPI_API_KEY` to enable video analysis and, optionally, `YOUTUBE_API_KEY` to check YouTube duration through the official Data API. Keep both keys server-side; never use a `NEXT_PUBLIC_` name.
 3. Run npm run dev.
 4. Open http://localhost:3000.
 
@@ -17,7 +19,7 @@ Without a deAPI key, link checks, requirement review, browser draft storage, and
 
 ## Deploy
 
-Deploy as a **Node web service**, since link checks and video analysis use server routes. The included `render.yaml` configures Render's build, start command, and root health check. Keep `DEAPI_API_KEY` as a server-side environment secret if enabled. The same project can run on Vercel with its normal Next.js build; do not expose the key through a `NEXT_PUBLIC_` variable.
+Deploy as a **Node web service**, since link checks and video analysis use server routes. The included `render.yaml` configures Render's build, start command, and root health check. Keep `DEAPI_API_KEY` and `YOUTUBE_API_KEY` as server-side environment secrets if enabled. The same project can run on Vercel with its normal Next.js build; do not expose the key through a `NEXT_PUBLIC_` variable.
 
 ## Verify
 
@@ -29,7 +31,7 @@ Deploy as a **Node web service**, since link checks and video analysis use serve
 
 ## How it works
 
-The client keeps the draft and corrected requirements in browser storage. The /api/check route performs unauthenticated checks. It rejects local/private/credentialed URLs, resolves public DNS before each request, pins the vetted address for the connection, and revalidates every redirect. A GitHub repository is verified through GitHub's unauthenticated public API; other repository hosts remain human-review items. A reachable video page is never treated as proof of logged-out playback.
+The client keeps the draft and corrected requirements in browser storage. The /api/check route performs unauthenticated checks. It rejects local/private/credentialed URLs, resolves public DNS before each request, pins the vetted address for the connection, and revalidates every redirect. A GitHub repository is verified through GitHub's unauthenticated public API; other repository hosts remain human-review items. A reachable video page is never treated as proof of logged-out playback. With an optional `YOUTUBE_API_KEY`, Submitline reads duration through YouTube’s official Data API and blocks videos outside LovHack’s 2–3 minute window. When duration is unavailable, the entrant must confirm length manually; a YouTube oEmbed title is not duration evidence.
 
 With the entrant's consent, /api/video/start sends a supported public URL to deAPI's Marlin_2B Video Description model. /api/video/job polls the documented pending, processing, done, and error states. The timeline shows model descriptions as visual observations, with YouTube jump links. deAPI reads pixels, not audio.
 

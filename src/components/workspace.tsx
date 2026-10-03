@@ -374,7 +374,7 @@ export default function Workspace() {
                         <label><span className="sr-only">Requirement obligation</span><select value={requirement.obligation} onChange={(event) => updateRequirement(requirement.id, { obligation: event.target.value as Requirement['obligation'] })}><option value="required">Required</option><option value="conditional">Conditional</option><option value="optional">Optional</option></select></label>
                       </div>
                     </details>
-                    {(status === 'review' || requirement.confirmed) && <label className="confirm-line"><input type="checkbox" checked={requirement.confirmed} onChange={(event) => updateRequirement(requirement.id, { confirmed: event.target.checked })} /><span>I reviewed this item against its source and confirmed the submitted material.</span></label>}
+                    {(status === 'review' || requirement.confirmed) && <label className="confirm-line"><input type="checkbox" checked={requirement.confirmed} onChange={(event) => updateRequirement(requirement.id, { confirmed: event.target.checked })} /><span>{requirement.kind === 'video' ? 'I opened this video while logged out and confirmed it plays, is 2–3 minutes long, and shows the right demo.' : 'I reviewed this item against its source and confirmed the submitted material.'}</span></label>}
                   </article>
                 ))}
               </div>

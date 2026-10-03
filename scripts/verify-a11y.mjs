@@ -18,7 +18,11 @@ try {
         await page.getByRole('button', { name: /Run judge-view preflight/ }).click();
         await page.getByText('Link unavailable').waitFor({ timeout: 30_000 });
         await page.getByText('Repository public').waitFor({ timeout: 30_000 });
-        await page.getByText('Video metadata available').waitFor({ timeout: 30_000 });
+        const videoEvidence = page.locator('.evidence-row').filter({ hasText: '03 / VIDEO' });
+        await videoEvidence.locator('time').waitFor({ timeout: 30_000 });
+        if (/^verified$/i.test((await videoEvidence.locator('.status').innerText()).trim())) {
+          throw new Error('The sample video cannot be automatically verified from a reachable title alone.');
+        }
         const embedTitle = await page.locator('iframe').getAttribute('title');
         if (!embedTitle?.trim()) throw new Error('The video embed needs an accessible title.');
       }

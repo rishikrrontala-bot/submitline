@@ -19,7 +19,11 @@ try {
   await desktop.getByRole('button', { name: /Run judge-view preflight/ }).click();
   await desktop.getByText('Repository public').waitFor({ timeout: 30_000 });
   await desktop.getByText('Link unavailable').waitFor({ timeout: 30_000 });
-  await desktop.getByText('Video metadata available').waitFor({ timeout: 30_000 });
+  const videoEvidence = desktop.locator('.evidence-row').filter({ hasText: '03 / VIDEO' });
+  await videoEvidence.locator('time').waitFor({ timeout: 30_000 });
+  if (/^verified$/i.test((await videoEvidence.locator('.status').innerText()).trim())) {
+    throw new Error('The sample video cannot be automatically verified from a reachable title alone.');
+  }
   await desktop.screenshot({ path: join(proofDir, 'sample-result.png'), fullPage: true });
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
   mobile.on('pageerror', (error) => pageErrors.push(error.message));

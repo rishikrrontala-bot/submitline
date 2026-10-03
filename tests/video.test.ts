@@ -31,6 +31,10 @@ test('supported video hosts and YouTube jump links are precise', () => {
   assert.equal(supportedVideoUrl(url), true);
   assert.equal(supportedVideoUrl('https://evil.youtube.com/watch?v=y-FgiJwzyMM'), false);
   assert.equal(youtubeId(url), 'y-FgiJwzyMM');
+  assert.equal(youtubeId('https://evil.youtube.com/watch?v=y-FgiJwzyMM'), undefined);
+  assert.equal(youtubeId('http://www.youtube.com/watch?v=y-FgiJwzyMM'), undefined);
   assert.match(videoJumpUrl(url, 42)!, /t=42s/);
+  assert.equal(videoJumpUrl('https://evil.youtube.com/watch?v=y-FgiJwzyMM', 42), undefined);
+  assert.equal(videoJumpUrl('https://evil.twitch.tv/video/123', 42), undefined);
   assert.equal(videoJumpUrl('https://www.tiktok.com/@someone/video/123', 42), undefined);
 });

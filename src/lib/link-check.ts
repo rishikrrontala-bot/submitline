@@ -3,6 +3,8 @@ import https from 'node:https';
 import type { IncomingHttpHeaders } from 'node:http';
 import type { CheckKind, CheckResult, EvidenceStatus } from './types';
 import { parsePublicUrl, resolvePublicAddress, UnsafeTargetError } from './url-safety';
+import { youtubeId } from './video';
+import { fetchYouTubeDuration, youtubeDurationEvidence } from './youtube-duration';
 
 interface HttpObservation { status: number; headers: IncomingHttpHeaders; body: string; finalUrl: string }
 
@@ -72,14 +74,28 @@ export async function checkLink(kind: CheckKind, inputUrl: string): Promise<Chec
       const oembedUrl = 'https://www.youtube.com/oembed?url=' + encodeURIComponent(url.toString()) + '&format=json';
       const result = await fetchPublicHeaders(oembedUrl, 'GET');
       if (result.status === 200) {
-        let metadata: { title?: string; author_name?: string } = {};
+        let metadata: { title?: unknown } = {};
         try { metadata = JSON.parse(result.body); } catch { /* unreadable metadata remains review */ }
-        if (metadata.title) return makeResult(kind, inputUrl, {
-          status: 'review', label: 'Video metadata available',
-          detail: 'YouTube returned the title “' + metadata.title.slice(0, 120) + '” without authentication. Confirm playback and 2–3 minute length while logged out.',
-          observation: 'Unauthenticated YouTube oEmbed metadata returned a video title.',
-          finalUrl: url.toString(), httpStatus: 200, title: metadata.title.slice(0, 120),
-        });
+        const title = typeof metadata.title === 'string' ? metadata.title.trim().slice(0, 120) : '';
+        if (title) {
+          const id = youtubeId(url.toString());
+          const duration = id ? await fetchYouTubeDuration(id, process.env.YOUTUBE_API_KEY) : undefined;
+          if (duration !== undefined) {
+            const evidence = youtubeDurationEvidence(duration);
+            return makeResult(kind, inputUrl, {
+              ...evidence,
+              detail: 'YouTube returned “' + title + '”. ' + evidence.detail,
+              finalUrl: url.toString(), httpStatus: 200, title,
+              durationSeconds: duration, durationSource: 'youtube-data-api',
+            });
+          }
+          return makeResult(kind, inputUrl, {
+            status: 'review', label: 'Video duration unverified',
+            detail: 'YouTube returned “' + title + '”, but its oEmbed metadata has no duration. Confirm playback and the 2–3 minute length while logged out.',
+            observation: 'Unauthenticated YouTube oEmbed metadata returned a title, not a duration.',
+            finalUrl: url.toString(), httpStatus: 200, title,
+          });
+        }
         return makeResult(kind, inputUrl, { status: 'review', label: 'Video metadata unclear', detail: 'YouTube replied, but its video metadata was unreadable.', httpStatus: 200 });
       }
       const classified = classifyHttpStatus(result.status, result.finalUrl);

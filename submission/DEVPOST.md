@@ -1,6 +1,6 @@
 # Submitline — Devpost draft
 
-The story below reflects the public deployment as verified on October 2. Add the YouTube or Vimeo video URL only after a logged-out playback check. Do not submit the fictional Northstar sample links.
+The story below reflects the public deployment as verified on October 3. Add the YouTube or Vimeo video URL only after a logged-out playback check. Do not submit the fictional Northstar sample links.
 
 ## Project overview
 
@@ -15,7 +15,7 @@ Paste your hackathon rules and draft submission links; Submitline checks what a 
 
 ## Inspiration
 
-A project can be finished and still become invisible to judges: a demo video is private, a deployed link returns 404, or a required field was omitted. The last hour before a deadline deserves a better tool than memory and a row of browser tabs. Submitline is for solo student builders who need one clear answer to a practical question: what can a judge actually open?
+I once finished and deployed a hackathon project, then missed its submission deadline by eight minutes. That failure made the final submission step feel like a product problem of its own. A strong project can still become invisible to judges when its video is private, a link returns 404, or a required field is missing. Submitline is for solo student builders who need one clear answer before they press submit: what can a judge actually open?
 
 ## What it does
 
@@ -44,3 +44,15 @@ Automated access is not identical to a human judge's browser. Some hosts block b
 ## Built by
 
 Rishik Rontala — solo entrant.
+
+## Devpost form map
+
+| Step | Prepared material |
+| --- | --- |
+| Manage team | Rishik Rontala, solo. |
+| Project overview | Use the name and tagline above; upload `proof/submitline-thumbnail.png` as the project thumbnail. |
+| Project details | Use the sections above as the story, the eight built-with tags, the live and source links, and the **new** public or unlisted 2:36 video URL. |
+| Additional details | Answer LovHack-specific questions from the live form and select only prizes whose requirements the entry actually meets. |
+| Submit | Review every field, accept the site terms, submit the project, and confirm Devpost shows **Submitted**. A saved draft is not an entry. |
+
+The previously shared `https://youtu.be/6R_b9qodNaQ` is 1:52 and must not be used for the required video. The exact event-specific fields become visible only after signing into Devpost; the account was logged out during the October 3 form audit. The final entry should be opened while logged out to confirm that its app and video links work.

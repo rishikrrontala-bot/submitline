@@ -18,8 +18,9 @@ export function youtubeId(raw: string): string | undefined {
   try { url = new URL(raw); } catch { return undefined; }
   const host = url.hostname.toLowerCase();
   const id = host === 'youtu.be' ? url.pathname.slice(1) :
-    host.endsWith('youtube.com') ? url.searchParams.get('v') || url.pathname.match(/^\/(?:shorts|embed)\/([^/]+)/)?.[1] : undefined;
-  return id && /^[A-Za-z0-9_-]{11}$/.test(id) ? id : undefined;
+    ['youtube.com', 'www.youtube.com', 'm.youtube.com'].includes(host)
+      ? url.searchParams.get('v') || url.pathname.match(/^\/(?:shorts|embed)\/([^/]+)/)?.[1] : undefined;
+  return url.protocol === 'https:' && id && /^[A-Za-z0-9_-]{11}$/.test(id) ? id : undefined;
 }
 
 export function normalizeJobState(value: unknown): VideoJob['state'] | 'unknown' {
@@ -66,9 +67,10 @@ export function observationLabel(observation: VideoObservation): string {
 }
 
 export function videoJumpUrl(raw: string, secondsValue: number): string | undefined {
-  const url = new URL(raw);
+  let url: URL;
+  try { url = new URL(raw); } catch { return undefined; }
   const host = url.hostname.toLowerCase();
-  if (host === 'youtu.be' || host.endsWith('youtube.com') || host.endsWith('twitch.tv')) {
+  if (url.protocol === 'https:' && (youtubeId(raw) || host === 'twitch.tv' || host === 'www.twitch.tv')) {
     url.searchParams.set('t', Math.floor(secondsValue) + 's');
     return url.toString();
   }

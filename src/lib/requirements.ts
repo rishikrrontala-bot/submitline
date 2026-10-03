@@ -1,4 +1,5 @@
 import type { CheckResult, Draft, EvidenceStatus, Requirement, RequirementKind } from './types';
+import { formatTimestamp } from './video';
 
 const sourceUrl = 'https://lovhack-season-3.devpost.com/#challenge-requirements';
 
@@ -111,15 +112,20 @@ export function evaluateRequirement(
     if (requirement.kind === 'video' && videoDuration !== undefined && (videoDuration < 120 || videoDuration > 180)) {
       return { status: 'blocked', reason: 'deAPI reports a video duration of ' + Math.round(videoDuration) + ' seconds; LovHack asks for 2–3 minutes. Confirm the original duration.' };
     }
+    if (requirement.kind === 'video' && result.durationSeconds !== undefined && (result.durationSeconds < 120 || result.durationSeconds > 180)) {
+      return { status: 'blocked', reason: result.detail + ' A confirmation checkbox cannot clear a measured out-of-range duration; review the original video or replace it.' };
+    }
     if (requirement.kind === 'video' && requirement.confirmed && result.status === 'review') return {
-      status: 'verified', reason: 'The video page responded, and the entrant confirmed logged-out playback and content.',
+      status: 'verified', reason: result.durationSeconds !== undefined
+        ? 'YouTube Data API reports ' + formatTimestamp(result.durationSeconds) + ' within range; the entrant confirmed logged-out playback, 2–3 minute length, and content.'
+        : 'The entrant confirmed logged-out playback, 2–3 minute length, and content; Submitline did not independently measure the duration.',
     };
     if (result.status === 'review') return { status: 'review', reason: result.detail };
     if (requirement.kind === 'video' && !requirement.confirmed) return {
       status: 'review',
-      reason: videoAnalyzed ? 'Visual observations are ready; confirm logged-out playback and content.' : 'The page responded; confirm logged-out playback and content.',
+      reason: videoAnalyzed ? 'Visual observations are ready; confirm logged-out playback, 2–3 minute length, and content.' : 'The page responded; confirm logged-out playback, 2–3 minute length, and content.',
     };
-    return { status: 'verified', reason: requirement.kind === 'video' ? 'Server evidence and entrant playback review are complete.' : result.detail };
+    return { status: 'verified', reason: requirement.kind === 'video' ? 'Server evidence and entrant review of playback, 2–3 minute length, and content are complete.' : result.detail };
   }
   return requirement.confirmed
     ? { status: 'verified', reason: 'Entrant confirmed this text against the source rule.' }
