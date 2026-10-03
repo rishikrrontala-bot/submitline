@@ -30,3 +30,9 @@ test('an unsafe target is blocked before any network request', async () => {
   assert.equal(result.label, 'Unsafe link rejected');
   assert.equal(result.inputUrl, 'http://127.0.0.1:80/private');
 });
+
+test('a GitHub deep link is not treated as a verified repository root', async () => {
+  const result = await checkLink('repo', 'https://github.com/example/repository/tree/branch/missing');
+  assert.equal(result.status, 'review');
+  assert.match(result.detail, /exact subpage/);
+});

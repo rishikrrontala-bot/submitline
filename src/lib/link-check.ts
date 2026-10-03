@@ -88,6 +88,7 @@ export async function checkLink(kind: CheckKind, inputUrl: string): Promise<Chec
     if (kind === 'repo' && url.hostname.toLowerCase() === 'github.com') {
       const path = url.pathname.split('/').filter(Boolean);
       if (path.length < 2) return makeResult(kind, inputUrl, { status: 'blocked', label: 'Repository path missing', detail: 'Enter a GitHub owner and repository name.' });
+      if (path.length > 2) return makeResult(kind, inputUrl, { status: 'review', label: 'Repository subpage needs review', detail: 'This link points inside a repository. Enter the repository root to verify public visibility, or open this exact subpage while logged out.' });
       const apiUrl = 'https://api.github.com/repos/' + encodeURIComponent(path[0]) + '/' + encodeURIComponent(path[1].replace(/\.git$/, ''));
       const result = await fetchPublicHeaders(apiUrl, 'GET');
       if (result.status === 200) {
