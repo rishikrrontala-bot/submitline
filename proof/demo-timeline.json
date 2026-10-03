@@ -1,0 +1,123 @@
+[
+  {
+    "id": "01",
+    "title": "THE LAST CLICK",
+    "start": 0.00019249999999988176,
+    "end": 12.001099458,
+    "narration": "A judge does not see your local build. They see a link. If that link fails, strong work disappears before it can be judged.",
+    "captions": [
+      "A judge does not see your local build. They see a link.",
+      "If that link fails, strong work disappears before it can be judged."
+    ]
+  },
+  {
+    "id": "02",
+    "title": "THE JUDGE VIEW",
+    "start": 12.0014415,
+    "end": 25.003819790999998,
+    "narration": "Submitline gives a hackathon entry one last outside-in check. The draft and judge view sit side by side, tied to LovHack’s published requirements.",
+    "captions": [
+      "Submitline gives a hackathon entry one last outside-in check.",
+      "The draft and judge view sit side by side, tied to LovHack’s published requirements."
+    ]
+  },
+  {
+    "id": "03",
+    "title": "A REAL CONTRACT",
+    "start": 25.004488833,
+    "end": 37.007535833,
+    "narration": "Each requirement keeps its source nearby. A live demo matters when possible; a repository is optional; a two-to-three-minute video is required.",
+    "captions": [
+      "Each requirement keeps its source nearby.",
+      "A live demo matters when possible; a repository is optional; a two-to-three-minute video is required."
+    ]
+  },
+  {
+    "id": "04",
+    "title": "A DELIBERATE FAILURE",
+    "start": 37.00791458300001,
+    "end": 50.008601291,
+    "narration": "For this walkthrough, I load Northstar, a clearly marked fictional example. Its live address is intentionally broken. These are test inputs, not a real hackathon entry.",
+    "captions": [
+      "For this walkthrough, I load Northstar, a clearly marked fictional example.",
+      "Its live address is intentionally broken. These are test inputs, not a real hackathon entry."
+    ]
+  },
+  {
+    "id": "05",
+    "title": "THE WHOLE ENTRY",
+    "start": 50.009147791000004,
+    "end": 62.00987,
+    "narration": "The example includes its story, technologies, build-period work, reuse disclosure, repository, and video link. Submitline does not flatten those different obligations into one score.",
+    "captions": [
+      "The example includes its story, technologies, build-period work, reuse disclosure, repository, and video link.",
+      "Submitline does not flatten those different obligations into one score."
+    ]
+  },
+  {
+    "id": "06",
+    "title": "PREFLIGHT",
+    "start": 62.00993833300001,
+    "end": 82.011183375,
+    "narration": "Now I run the preflight. The server checks these URLs without a sign-in. The live address returns HTTP four-oh-four: a blocker a judge would hit too.",
+    "captions": [
+      "Now I run the preflight. The server checks these URLs without a sign-in.",
+      "The live address returns HTTP four-oh-four: a blocker a judge would hit too."
+    ]
+  },
+  {
+    "id": "07",
+    "title": "NO FALSE PASS",
+    "start": 82.011267,
+    "end": 97.013038541,
+    "narration": "The public repository can be confirmed. The video link exposes metadata. But metadata is not playback or proof of what the demo shows, so that remains human review.",
+    "captions": [
+      "The public repository can be confirmed. The video link exposes metadata.",
+      "But metadata is not playback or proof of what the demo shows, so that remains human review."
+    ]
+  },
+  {
+    "id": "08",
+    "title": "FIX ONLY WHAT FAILED",
+    "start": 97.013268916,
+    "end": 114.014792,
+    "narration": "I replace the dead address and recheck only that item. The fresh request reaches example dot com. Reachability is evidence, not proof of functionality.",
+    "captions": [
+      "I replace the dead address and recheck only that item.",
+      "The fresh request reaches example dot com. Reachability is evidence, not proof of functionality."
+    ]
+  },
+  {
+    "id": "09",
+    "title": "EVIDENCE, NOT A SCORE",
+    "start": 114.015078916,
+    "end": 127.01634325,
+    "narration": "Each status states what was observed and points back to its rule. Entrants still confirm their claims and watch the public video while logged out.",
+    "captions": [
+      "Each status states what was observed and points back to its rule.",
+      "Entrants still confirm their claims and watch the public video while logged out."
+    ]
+  },
+  {
+    "id": "10",
+    "title": "VIDEO, HONESTLY",
+    "start": 127.016947333,
+    "end": 142.0189035,
+    "narration": "With consent and a deAPI key, Video Description can return timestamped observations of visible scenes. No key is configured for this recording, so no model result is shown.",
+    "captions": [
+      "With consent and a deAPI key, Video Description can return timestamped observations of visible scenes.",
+      "No key is configured for this recording, so no model result is shown."
+    ]
+  },
+  {
+    "id": "11",
+    "title": "READY TO SUBMIT",
+    "start": 142.01915125,
+    "end": 156.021018166,
+    "narration": "Finally, I export the checklist: rules, observed links, and the manual checks that remain. Submitline. Built by Rishik Rontala. One last look before they click.",
+    "captions": [
+      "Finally, I export the checklist: rules, observed links, and the manual checks that remain.",
+      "Submitline. Built by Rishik Rontala. One last look before they click."
+    ]
+  }
+]

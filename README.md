@@ -40,3 +40,7 @@ LovHack's [requirements](https://lovhack-season-3.devpost.com/#challenge-require
 This repository was created on **October 2, 2026**, inside LovHack's September 26–October 4 build period. The application code, design, and documentation are new work for this entry. npm packages are third-party dependencies; no earlier Rishik project code was copied. The built-in Northstar entry is explicitly fictional, and its public repo/video links are reference material for testing, not Submitline submission artifacts.
 
 See [APP-BRIEF.md](APP-BRIEF.md), [WIN-CONTRACT.md](WIN-CONTRACT.md), [DESIGN.md](DESIGN.md), and [LIMITATIONS.md](LIMITATIONS.md) for the product contract, event research, visual direction, and honest boundaries.
+
+## Product demo
+
+The [2:36 narrated, captioned demo](proof/submitline-demo.mp4) films real blocked-to-corrected link checks. Its [transcript](proof/DEMO-SCRIPT.md), [SRT captions](proof/submitline-demo.srt), and [thumbnail](proof/submitline-thumbnail.png) are included. The fictional example is clearly labeled; no deAPI output is shown without a real key.

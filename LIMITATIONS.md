@@ -6,4 +6,5 @@
 - deAPI Video Description observes video pixels, not audio. A scene description is a model observation, not proof that a button works or that a spoken claim is true. Processing sends the video URL or file to deAPI. This app uses URLs only.
 - YouTube observations can jump in the embedded player. Other supported deAPI hosts may provide observations without a reliable timestamp deep link; those moments need manual seeking.
 - deAPI analysis requires a configured key and a supported public video host. Its free/basic quota and duration or size limits may delay or prevent a run. The app must show that state explicitly.
+- The current public deployment has no deAPI key. The provider request and polling paths have contract tests, but model accuracy on small UI actions has not been verified by a live inference. The demo shows this limitation plainly.
 - Draft data is saved in this browser only. There is no account, synchronization, background monitoring, automatic Devpost submission, or guarantee of judging eligibility.
