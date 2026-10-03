@@ -15,12 +15,17 @@ Requires Node.js 22 or newer.
 
 Without a deAPI key, link checks, requirement review, browser draft storage, and Markdown export still work. Video analysis reports its unavailable state explicitly.
 
+## Deploy
+
+Deploy as a **Node web service**, since link checks and video analysis use server routes. The included `render.yaml` configures Render's build, start command, and root health check. Keep `DEAPI_API_KEY` as a server-side environment secret if enabled. The same project can run on Vercel with its normal Next.js build; do not expose the key through a `NEXT_PUBLIC_` variable.
+
 ## Verify
 
 - npm test — requirement extraction, status classification, address rejection, deAPI job states, and evidence labels.
 - npm run typecheck
 - npm run build
 - npm run verify:ui — with the app running at http://127.0.0.1:3000 (or SUBMITLINE_URL), runs real Chrome desktop/phone checks and the example's broken live link, public GitHub repository, and public YouTube metadata path. Screenshots are saved in proof/.
+- npm run verify:a11y — runs an axe-core WCAG audit at desktop and phone widths against both the empty workspace and populated evidence board. It excludes YouTube's cross-origin iframe internals, which the app cannot edit; the iframe has its own accessible title.
 
 ## How it works
 

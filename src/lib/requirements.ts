@@ -52,7 +52,8 @@ const keywordKind = (line: string): RequirementKind => {
   if (/repo|github|gitlab|source code/.test(value)) return 'repo';
   if (/live|prototype|deployed|demo link|website|web app/.test(value)) return 'live';
   if (/technolog|framework|api|tool/.test(value)) return 'technologies';
-  if (/prior work|pre.?existing|reus|built during/.test(value)) return 'reuse';
+  if (/prior work|pre.?existing|reus/.test(value)) return 'reuse';
+  if (/built during|work created during|new work/.test(value)) return 'build';
   if (/description|write.?up|explain the project/.test(value)) return 'description';
   if (/project name|title of project/.test(value)) return 'name';
   return 'manual';
@@ -80,7 +81,7 @@ function inputFor(kind: RequirementKind, draft: Draft): string {
     case 'technologies': return draft.technologies;
     case 'build': return draft.buildNotes;
     case 'reuse': return draft.reuseNotes;
-    case 'live': return draft.liveUrl || draft.prototypeNotes;
+    case 'live': return draft.liveUrl;
     case 'repo': return draft.repoUrl;
     case 'video': return draft.videoUrl;
     default: return '';
@@ -99,8 +100,8 @@ export function evaluateRequirement(
     : { status: 'review', reason: 'Read the source rule and confirm this item manually.' };
   const input = inputFor(requirement.kind, draft).trim();
   if (!input) {
-    if (requirement.obligation === 'optional') return { status: 'review', reason: 'Optional for LovHack; no repository supplied.' };
     if (requirement.kind === 'live' && draft.prototypeNotes.trim()) return { status: 'review', reason: 'Alternative judge-evaluation plan supplied; review it manually.' };
+    if (requirement.obligation === 'optional') return { status: 'review', reason: requirement.kind === 'repo' ? 'Optional for LovHack; no repository supplied.' : 'Optional item not supplied.' };
     return { status: requirement.obligation === 'required' ? 'blocked' : 'review', reason: 'No matching submission item entered.' };
   }
   if (requirement.kind === 'live' || requirement.kind === 'repo' || requirement.kind === 'video') {

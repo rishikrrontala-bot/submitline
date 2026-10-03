@@ -2,6 +2,7 @@
   "name": "submitline",
   "version": "0.1.0",
   "private": true,
+  "engines": { "node": ">=22.0.0 <23.0.0" },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
     "verify:ui": "node scripts/verify-ui.mjs",
+    "verify:a11y": "node scripts/verify-a11y.mjs",
     "proof:raw": "node scripts/record-proof.mjs"
   },
   "dependencies": {
@@ -20,6 +22,7 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@tailwindcss/postcss": "^4.1.0",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",

@@ -97,7 +97,20 @@ export default function Workspace() {
     setVideoJob(null);
     setVideoAnalyzedUrl('');
     setVideoError('');
+    setPlayerStart(0);
     setSampleMode(true);
+    setRunStarted(false);
+  }
+
+  function startBlankEntry() {
+    setDraft(emptyDraft);
+    setRequirements(lovhackRequirements);
+    setChecks({});
+    setVideoJob(null);
+    setVideoAnalyzedUrl('');
+    setVideoError('');
+    setPlayerStart(0);
+    setSampleMode(false);
     setRunStarted(false);
   }
 
@@ -268,7 +281,7 @@ export default function Workspace() {
           <div className="work-grid">
             <form className="entry-panel" onSubmit={(event) => { event.preventDefault(); void runAll(); }}>
               <div className="panel-head"><h3>Your draft</h3><button type="button" className="text-action" onClick={loadSample}>Load example ↗</button></div>
-              {sampleMode && <p className="sample-note"><strong>Example only.</strong> Northstar is fictional. The live URL is intentionally missing; the repository and video belong to public reference projects. Replace every sample field before a real submission.</p>}
+              {sampleMode && <div className="sample-note"><p><strong>Example only.</strong> Northstar is fictional. The live URL is intentionally missing; the repository and video belong to public reference projects.</p><button type="button" className="text-action" onClick={startBlankEntry}>Start a blank entry ↗</button></div>}
 
               <div className="field">
                 <label className="field-label" htmlFor="project-name">Project name <small>Devpost project name</small></label>
@@ -357,6 +370,7 @@ export default function Workspace() {
                     <details className="rule-editor"><summary>Correct extracted item</summary>
                       <div className="rule-edit">
                         <label><span className="sr-only">Requirement title</span><input value={requirement.title} onChange={(event) => updateRequirement(requirement.id, { title: event.target.value })} /></label>
+                        <label><span className="sr-only">Evidence field</span><select value={requirement.kind} onChange={(event) => updateRequirement(requirement.id, { kind: event.target.value as Requirement['kind'], confirmed: false })}><option value="name">Project name</option><option value="description">Description</option><option value="live">Live demo</option><option value="repo">Repository</option><option value="video">Video</option><option value="technologies">Technologies</option><option value="build">Build-period work</option><option value="reuse">Earlier work</option><option value="manual">Manual review</option></select></label>
                         <label><span className="sr-only">Requirement obligation</span><select value={requirement.obligation} onChange={(event) => updateRequirement(requirement.id, { obligation: event.target.value as Requirement['obligation'] })}><option value="required">Required</option><option value="conditional">Conditional</option><option value="optional">Optional</option></select></label>
                       </div>
                     </details>
@@ -393,7 +407,9 @@ export default function Workspace() {
                 {videoObservations.map((observation, index) => {
                   const jump = videoJumpUrl(draft.videoUrl, observation.start);
                   return <li key={index}>
-                    <button type="button" onClick={() => { if (videoId) setPlayerStart(observation.start); else if (jump) window.open(jump, '_blank', 'noopener,noreferrer'); }} aria-label={'Jump to ' + formatTimestamp(observation.start)}>{formatTimestamp(observation.start)} ↗</button>
+                    {videoId || jump
+                      ? <button type="button" onClick={() => { if (videoId) setPlayerStart(observation.start); else if (jump) window.open(jump, '_blank', 'noopener,noreferrer'); }} aria-label={'Jump to ' + formatTimestamp(observation.start)}>{formatTimestamp(observation.start)} ↗</button>
+                      : <span className="timeline-time" title="Open the original video and seek to this time manually">{formatTimestamp(observation.start)}</span>}
                     <div><p>{observation.description}</p><small>{observationLabel(observation)} · model output</small>{jump && <a href={jump} target="_blank" rel="noreferrer" className="mini-action">Open at this moment ↗</a>}</div>
                   </li>;
                 })}
