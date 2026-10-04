@@ -1,6 +1,6 @@
-# Submitline video upload
+# Submitline video publication
 
-Use the finished `proof/submitline-demo.mp4` file. It is 2:36, narrated, and has captions burned in. `proof/submitline-demo.srt` is also available for platform captions.
+The [public demo](https://youtu.be/kJ6F3ThVHcM) is 2:37 according to YouTube Studio, and its public oEmbed resolves. The local `proof/submitline-demo.mp4` master is 2:36, narrated, and has captions burned in. `proof/submitline-demo.srt` is also available for platform captions.
 
 ## Metadata
 
@@ -31,4 +31,4 @@ Built by Rishik Rontala.
 - Audience: **No, it is not made for kids**. The product targets hackathon entrants, not children under 13.
 - Upload the `proof/submitline-thumbnail.png` image if the channel allows custom thumbnails.
 - Add `proof/submitline-demo.srt` as English captions if possible; burned captions already appear in the video.
-- Confirm logged-out playback and 2:36 duration before putting the URL in Devpost.
+- Check the submitted Devpost entry while logged out for playback and the public video's 2:37 duration.

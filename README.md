@@ -4,6 +4,8 @@
 
 **Live app:** https://submitline.vercel.app
 
+**LovHack submission:** https://devpost.com/software/submitline (submitted October 4, 2026)
+
 Submitline is a LovHack Season 3 entry built by **Rishik Rontala**. It pairs the official submission contract with unauthenticated link checks, GitHub public-visibility evidence, YouTube metadata, and deAPI Video Description observations. Each requirement stays **verified**, **blocked**, or **needs human review**; there is no readiness score.
 
 ## Run locally
@@ -45,4 +47,4 @@ See [APP-BRIEF.md](APP-BRIEF.md), [WIN-CONTRACT.md](WIN-CONTRACT.md), [DESIGN.md
 
 ## Product demo
 
-The [2:36 narrated, captioned demo](proof/submitline-demo.mp4) films real blocked-to-corrected link checks. Its [transcript](proof/DEMO-SCRIPT.md), [SRT captions](proof/submitline-demo.srt), and [thumbnail](proof/submitline-thumbnail.png) are included. The fictional example is clearly labeled; no deAPI output is shown without a real key.
+Watch the [public product demo](https://youtu.be/kJ6F3ThVHcM), which YouTube Studio reports as 2:37, for real blocked-to-corrected link checks. The [local narrated, captioned master](proof/submitline-demo.mp4), [transcript](proof/DEMO-SCRIPT.md), [SRT captions](proof/submitline-demo.srt), and [thumbnail](proof/submitline-thumbnail.png) are included. The fictional example is clearly labeled; no deAPI output is shown without a real key.

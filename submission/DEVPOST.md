@@ -1,6 +1,6 @@
-# Submitline — Devpost draft
+# Submitline — Devpost submission
 
-The story below reflects the public deployment as verified on October 3. Add the YouTube or Vimeo video URL only after a logged-out playback check. Do not submit the fictional Northstar sample links.
+The story below reflects the public deployment as verified on October 3. The [Devpost entry](https://devpost.com/software/submitline) was submitted to LovHack Season 3 on October 4, 2026; Devpost displayed “Project submitted!” The entry was a 4/5-step draft on October 3. The fictional Northstar sample links are not Submitline submission artifacts.
 
 ## Project overview
 
@@ -39,7 +39,7 @@ Automated access is not identical to a human judge's browser. Some hosts block b
 
 - Working demo: https://submitline.vercel.app
 - Public source: https://github.com/rishikrrontala-bot/submitline
-- 2–3 minute narrated, captioned product demo: [YouTube or Vimeo URL after logged-out playback check]
+- 2–3 minute narrated, captioned product demo: https://youtu.be/kJ6F3ThVHcM
 
 ## Built by
 
@@ -51,8 +51,8 @@ Rishik Rontala — solo entrant.
 | --- | --- |
 | Manage team | Rishik Rontala, solo. |
 | Project overview | Use the name and tagline above; upload `proof/submitline-thumbnail.png` as the project thumbnail. |
-| Project details | Use the sections above as the story, the eight built-with tags, the live and source links, and the **new** public or unlisted 2:36 video URL. |
+| Project details | Use the sections above as the story, the eight built-with tags, the live and source links, and the public 2:37 [YouTube video](https://youtu.be/kJ6F3ThVHcM). |
 | Additional details | Answer LovHack-specific questions from the live form and select only prizes whose requirements the entry actually meets. |
-| Submit | Review every field, accept the site terms, submit the project, and confirm Devpost shows **Submitted**. A saved draft is not an entry. |
+| Submit | Completed October 4; Devpost displayed **Project submitted!** |
 
-The previously shared `https://youtu.be/6R_b9qodNaQ` is 1:52 and must not be used for the required video. The exact event-specific fields become visible only after signing into Devpost; the account was logged out during the October 3 form audit. The final entry should be opened while logged out to confirm that its app and video links work.
+YouTube Studio reports 2:37 for the public video, and its public oEmbed resolves. Open the submitted entry while logged out to confirm that its app and video links work.

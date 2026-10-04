@@ -6,4 +6,4 @@ The video opens with the judge-access problem, shows LovHack's source-linked con
 
 No deAPI model observations appear. No provider key was available for a real inference, and the narration says so directly. The application displays an honest unavailable state instead of mock results.
 
-The 2:36 file is ready for a YouTube or Vimeo upload. Verify logged-out playback before putting that URL into Devpost. The uploaded `https://youtu.be/6R_b9qodNaQ` video is **1:52** according to YouTube's public player response, so it does not meet LovHack's 2–3 minute requirement.
+The [public YouTube demo](https://youtu.be/kJ6F3ThVHcM) is 2:37 according to YouTube Studio, and its public oEmbed resolves. The local master is 2:36. The submitted Devpost entry should also be checked while logged out for playback.
